@@ -1,17 +1,15 @@
-// Lógica para la Magic Nav Bar
+// Lógica para la Magic Nav Bar (Activación al pasar el mouse)
 const list = document.querySelectorAll('.list');
 
 function activeLink() {
+    // Removemos la clase activa de todos
     list.forEach((item) => item.classList.remove('active'));
+    // Se la agregamos al elemento sobre el que está el cursor
     this.classList.add('active');
 }
 
-list.forEach((item) => item.addEventListener('click', activeLink));
+// Cambiamos 'click' por 'mouseenter'
+list.forEach((item) => item.addEventListener('mouseenter', activeLink));
 
-// Lógica para el Radial Share Menu
-const toggle = document.querySelector('.toggle');
-const menu = document.querySelector('.radial-menu');
-
-toggle.onclick = function() {
-    menu.classList.toggle('active');
-}
+// Nota: El código JS del menú radial se eliminó porque 
+// ahora lo controlaremos de forma más nativa y fluida con CSS.

@@ -139,15 +139,18 @@ body {
    ========================================= */
 .radial-menu {
     position: relative;
-    width: 200px;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 250px;
+    height: 250px;
+    /* Ya no necesitamos flexbox aquí porque usaremos posicionamiento absoluto exacto */
 }
 
+/* --- Botón Central --- */
 .radial-menu .toggle {
     position: absolute;
+    /* Centrado perfecto */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 60px;
     height: 60px;
     background: #fff;
@@ -158,50 +161,63 @@ body {
     align-items: center;
     font-size: 2em;
     cursor: pointer;
-    z-index: 10000;
-    transition: transform 0.5s;
+    z-index: 10; /* Z-index mayor para que siempre esté al frente */
+    transition: transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1), background 0.5s;
     box-shadow: 0 3px 4px rgba(0,0,0,0.15);
 }
 
-.radial-menu.active .toggle {
-    transform: rotate(315deg);
-    background: #fff;
-    color: #333;
+/* Al pasar el mouse: gira 360 grados y vuelve a quedar derecho */
+.radial-menu:hover .toggle {
+    transform: translate(-50%, -50%) rotate(360deg);
+    background: #f8f9fa;
 }
 
+/* --- Opciones del Menú (Abanico) --- */
 .radial-menu li {
     position: absolute;
-    left: 0;
+    /* Todos nacen exactamente del centro */
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    margin-top: -20px; /* La mitad del alto para centrar perfecto */
+    margin-left: -20px; /* La mitad del ancho para centrar perfecto */
     list-style: none;
     transition: 0.5s;
-    transform: rotate(0deg) translateX(80px); /* 80px es el radio de apertura */
-    transform-origin: 100px; /* Mitad del contenedor radial-menu */
+    /* Inicialmente en el centro (translateX en 0) */
+    transform: rotate(calc(360deg / 8 * var(--i))) translateX(0px); 
     opacity: 0;
+    z-index: 5; /* Z-index menor que el botón para que salgan por detrás */
 }
 
-.radial-menu.active li {
-    /* La magia ocurre aquí usando variables CSS para separar cada ítem 45 grados */
-    transform: rotate(calc(360deg / 8 * var(--i)));
+/* Al pasar el mouse al contenedor: El abanico se abre a 85px de distancia */
+.radial-menu:hover li {
+    transform: rotate(calc(360deg / 8 * var(--i))) translateX(85px);
     opacity: 1;
 }
 
+/* --- Íconos dentro del abanico --- */
 .radial-menu li a {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 40px;
-    height: 40px;
+    width: 100%;
+    height: 100%;
     background: #fff;
-    color: var(--clr); /* Usa el color definido en el HTML */
+    color: var(--clr);
     border-radius: 50%;
     font-size: 1.5em;
-    transition: 0.5s;
+    text-decoration: none;
+    transition: 0.3s;
     box-shadow: 0 3px 4px rgba(0,0,0,0.15);
-    /* Des-rotar el ícono para que quede derecho */
+    /* Des-rota el ícono para que no quede de cabeza o chueco */
     transform: rotate(calc(360deg / -8 * var(--i)));
 }
 
+/* Efecto al seleccionar una red social en específico */
 .radial-menu li a:hover {
     color: #fff;
     background: var(--clr);
+    /* Mantiene la des-rotación y hace un pequeño zoom */
+    transform: rotate(calc(360deg / -8 * var(--i))) scale(1.15);
 }
