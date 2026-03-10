@@ -3,28 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Animaciones Profesionales CSS</title>
+    <title>Portfolio Profesional Desktop </title>
+    <link rel="icon" type="image/png" href="./assets/img/favicon.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
+<body class="bg-light">
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Actividad: Animaciones CSS</a>
+            <a class="navbar-brand fw-bold" href="#">
+                <ion-icon name="code-slash-outline" class="me-2"></ion-icon>Portfolio UI/UX
+            </a>
+            <span class="navbar-text text-light">
+                Actividad: Animaciones CSS 
+            </span>
         </div>
     </nav>
 
-    <div class="container my-5">
-        <div class="row text-center mb-4">
-            <h2>Ejemplos de Interfaces UI Interactivas</h2>
-            <p>Integración de Magic Navigation Bar y Menú Radial</p>
-        </div>
+    <main class="container-fluid d-flex flex-grow-1 p-0">
+        
+        <aside class="col-md-3 bg-dark p-5 text-center shadow-lg">
+            <div class="avatar-container mb-4">
+                <img src="https://ui-avatars.com/api/?name=Diana+Gonzalez&background=00e5ff&color=222327&size=120" alt="Perfil" class="profile-img">
+            </div>
+            <h2 class="text-white fw-bold">Diana Gonzalez</h2>
+            <p class="text-muted mt-2 mb-0">Frontend Dev & UI Designer</p>
+            <p class="bio-text text-light mt-4 px-3">
+                Creando experiencias web interactivas y animaciones fluidas con CSS puro.
+            </p>
+            <hr class="border-secondary my-5">
+            <p class="text-muted">Estado: <span style="color: #00e5ff; font-weight: bold;">Disponible</span></p>
+        </aside>
 
-        <div class="row align-items-center justify-content-center gap-5">
-            <div class="col-md-5 component-box dark-bg border rounded">
-                <h4 class="text-white mb-5 mt-3">Menú de Navegación Animado</h4>
-                
+        <section class="col-md-9 bg-content p-5 position-relative d-flex align-items-center" style="padding-bottom: 120px !important;">
+            
+            <div class="row w-100 align-items-center h-100">
+                <div class="col-md-7 col-lg-8">
+                    <div class="section-title text-start mb-0">
+                        <h1 class="display-5 fw-bold text-dark">Mis Conexiones Profesionales</h1>
+                        <p class="lead text-muted mt-3">Pasa el mouse sobre el ícono de la derecha para conectar con mis redes sociales de forma instantánea y fluida.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-5 col-lg-4 d-flex justify-content-end align-items-center">
+                    <div class="radial-menu-section position-relative">
+                        <div class="radial-menu">
+                            <div class="toggle"><ion-icon name="share-social"></ion-icon></div>
+                            <li style="--i:0; --clr:#25d366;"><a href="#"><ion-icon name="logo-whatsapp"></ion-icon></a></li>
+                            <li style="--i:1; --clr:#000000;"><a href="#"><ion-icon name="logo-x"></ion-icon></a></li>
+                            <li style="--i:2; --clr:#ff4500;"><a href="#"><ion-icon name="logo-reddit"></ion-icon></a></li>
+                            <li style="--i:3; --clr:#0a66c2;"><a href="#"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+                            <li style="--i:4; --clr:#e1306c;"><a href="#"><ion-icon name="logo-instagram"></ion-icon></a></li>
+                            <li style="--i:5; --clr:#333333;"><a href="#"><ion-icon name="logo-github"></ion-icon></a></li>
+                            <li style="--i:6; --clr:#ff0000;"><a href="#"><ion-icon name="logo-youtube"></ion-icon></a></li>
+                            <li style="--i:7; --clr:#1877f2;"><a href="#"><ion-icon name="logo-facebook"></ion-icon></a></li>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bottom-nav-container position-absolute w-100 d-flex justify-content-center" style="bottom: 30px; left: 0;">
                 <div class="navigation mx-auto">
                     <ul>
                         <li class="list active">
@@ -42,7 +81,7 @@
                         <li class="list">
                             <a href="#">
                                 <span class="icon"><ion-icon name="chatbubble-outline"></ion-icon></span>
-                                <span class="text">Message</span>
+                                <span class="text">Chat</span>
                             </a>
                         </li>
                         <li class="list">
@@ -62,27 +101,11 @@
                 </div>
             </div>
 
-            <div class="col-md-5 component-box purple-bg border rounded d-flex flex-column align-items-center">
-                <h4 class="text-white mb-5 mt-3">Menú Radial Social</h4>
-                
-                <div class="radial-menu mb-4">
-                    <div class="toggle"><ion-icon name="share-social"></ion-icon></div>
-                    <li style="--i:0; --clr:#25d366;"><a href="#"><ion-icon name="logo-whatsapp"></ion-icon></a></li>
-                    <li style="--i:1; --clr:#000000;"><a href="#"><ion-icon name="logo-x"></ion-icon></a></li>
-                    <li style="--i:2; --clr:#ff4500;"><a href="#"><ion-icon name="logo-reddit"></ion-icon></a></li>
-                    <li style="--i:3; --clr:#0a66c2;"><a href="#"><ion-icon name="logo-linkedin"></ion-icon></a></li>
-                    <li style="--i:4; --clr:#e1306c;"><a href="#"><ion-icon name="logo-instagram"></ion-icon></a></li>
-                    <li style="--i:5; --clr:#333333;"><a href="#"><ion-icon name="logo-github"></ion-icon></a></li>
-                    <li style="--i:6; --clr:#ff0000;"><a href="#"><ion-icon name="logo-youtube"></ion-icon></a></li>
-                    <li style="--i:7; --clr:#1877f2;"><a href="#"><ion-icon name="logo-facebook"></ion-icon></a></li>
-                </div>
-            </div>
-        </div>
-    </div>
+        </section>
 
-    <footer class="bg-dark text-white text-center py-3 mt-auto">
-        <div class="container">
-            <p class="mb-0">Desarrollado por: <strong>[TU NOMBRE COMPLETO AQUÍ]</strong> | Matrícula: [TU MATRÍCULA]</p>
+    </main> <footer class="bg-dark text-white text-center py-3 w-100 mt-auto border-top border-secondary">
+        <div class="container-fluid">
+            <p class="mb-0">Desarrollado por: <span style="color: #00e5ff; font-weight: bold;">González Rivera Diana Laura</span> | Matrícula: 22200735</p>
         </div>
     </footer>
 

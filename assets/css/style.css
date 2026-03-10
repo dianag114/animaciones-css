@@ -1,39 +1,157 @@
-/* Configuraciones Generales */
+/* =========================================
+   ESTILOS GENERALES Y LAYOUT DE ESCRITORIO
+   ========================================= */
 body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-color: #f4f4f9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.component-box {
-    height: 400px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    overflow: hidden;
+aside {
+    border-right: 1px solid #444;
+    position: relative;
+    z-index: 100;
 }
 
-.dark-bg { background-color: #222327; }
-.purple-bg { background-color: #29253b; }
+.profile-img {
+    border-radius: 50%;
+    /* Borde Turquesa */
+    border: 5px solid #00e5ff; 
+    padding: 3px;
+    /* Resplandor Turquesa */
+    box-shadow: 0 0 25px rgba(0, 229, 255, 0.4); 
+}
+
+.bio-text {
+    font-size: 0.95em;
+    opacity: 0.8;
+}
+
+section.col-md-9.bg-content {
+    background-color: #f4f7f6;
+}
 
 /* =========================================
-   COMPONENTE 1: MAGIC NAV BAR
+   COMPONENTE: RADIAL SHARE MENU
    ========================================= */
-.navigation {
-    position: relative;
-    width: 350px; /* Ancho para 5 iconos de 70px */
-    height: 70px;
-    background: #fff;
+/* Ahora que está dentro de una columna de Bootstrap, solo 
+   necesita estar centrado verticalmente dentro de su celda */
+.radial-menu-section {
+    width: 250px;
+    height: 250px;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 10px;
+}
+
+.radial-menu {
+    position: relative;
+    width: 250px;
+    height: 250px;
+}
+
+/* --- Botón Central --- */
+.radial-menu .toggle {
+    position: absolute;
+    /* Centrado perfecto dentro del contenedor .radial-menu */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70px;
+    height: 70px;
+    background: #f4f7f6;
+    color: #222327;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.3em;
+    cursor: pointer;
+    z-index: 10;
+    transition: transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1), background 0.3s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* Al pasar el mouse: giro de 360° y color TURQUESA */
+.radial-menu:hover .toggle {
+    transform: translate(-50%, -50%) rotate(360deg);
+    background: #00e5ff;
+}
+
+/* --- Opciones del Menú (Abanico) --- */
+.radial-menu li {
+    position: absolute;
+    /* Todos nacen exactamente del centro */
+    top: 50%;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    margin-top: -25px;
+    margin-left: -25px;
+    list-style: none;
+    transition: 0.5s;
+    /* Inician escondidos en el centro */
+    transform: rotate(calc(360deg / 8 * var(--i))) translateX(0px); 
+    opacity: 0;
+    z-index: 5;
+}
+
+/* Apertura del abanico */
+.radial-menu:hover li {
+    transform: rotate(calc(360deg / 8 * var(--i))) translateX(95px); /* Se abren a 95px */
+    opacity: 1;
+}
+
+.radial-menu li a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background: #f4f7f6;
+    color: var(--clr);
+    border-radius: 50%;
+    font-size: 1.5em;
+    text-decoration: none;
+    transition: 0.3s;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+    /* Des-rotación del ícono */
+    transform: rotate(calc(360deg / -8 * var(--i)));
+}
+
+.radial-menu li a:hover {
+    color: #f4f7f6;
+    background: var(--clr);
+    transform: rotate(calc(360deg / -8 * var(--i))) scale(1.15);
+}
+
+/* =========================================
+   COMPONENTE: MAGIC NAV BAR (Iconos sobre Pelotita Arreglado)
+   ========================================= */
+.bottom-nav-container {
+    z-index: 200; /* Siempre encima de todo */
+}
+
+.navigation {
+    position: relative;
+    /* Más ancho para escritorio */
+    width: 500px;
+    height: 70px;
+    /* FONDO AZUL CLARITO */
+    background: #e0f7fa; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
 }
 
 .navigation ul {
+    position: relative; /* Importante para posicionar el indicator relativo a la lista */
     display: flex;
-    width: 350px;
+    /* Ajustamos el ancho para los 5 iconos (100px cada uno) */
+    width: 500px;
     padding: 0;
     margin: 0;
 }
@@ -41,9 +159,18 @@ body {
 .navigation ul li {
     position: relative;
     list-style: none;
-    width: 70px;
+    /* Ancho expandido para escritorio */
+    width: 100px;
     height: 70px;
+    /* Z-index base bajo para los elementos normales */
     z-index: 1;
+    transition: z-index 0.5s; /* Suavizamos el cambio de z-index */
+}
+
+/* CORRECCIÓN CRÍTICA: Cuando el elemento está ACTIVO, 
+   subimos su z-index por ENCIMA de la pelotita (z-index 10) */
+.navigation ul li.active {
+    z-index: 20; 
 }
 
 .navigation ul li a {
@@ -62,22 +189,27 @@ body {
     position: relative;
     display: block;
     line-height: 75px;
-    font-size: 1.5em;
+    font-size: 1.8em; /* Íconos un poco más grandes */
     text-align: center;
     transition: 0.5s;
     color: #222327;
+    /* Aseguramos que la transición de color sea limpia */
+    z-index: 1; 
 }
 
+/* Cuando está activo, el icono sube y cambia de color (si quieres) */
 .navigation ul li.active a .icon {
     transform: translateY(-32px);
-    color: #222327;
+    /* Mantengo el color negro para que contraste con el turquesa, 
+       pero puedes cambiarlo aquí si quieres un icono blanco, por ejemplo */
+    color: #222327; 
 }
 
 .navigation ul li a .text {
     position: absolute;
     color: #222327;
-    font-weight: 400;
-    font-size: 0.75em;
+    font-weight: 600;
+    font-size: 0.85em; /* Texto más legible en escritorio */
     letter-spacing: 0.05em;
     transition: 0.5s;
     opacity: 0;
@@ -89,20 +221,22 @@ body {
     transform: translateY(10px);
 }
 
-/* El círculo verde que se mueve */
+/* --- La Pelotita Mágica (Indicator) --- */
 .indicator {
     position: absolute;
     top: -50%;
-    width: 70px;
+    width: 70px; /* Tamaño de la burbuja */
     height: 70px;
-    background: #29fd53;
+    background: #00e5ff; /* Color Turquesa */
     border-radius: 50%;
-    border: 6px solid #222327; /* Mismo color que el fondo dark-bg para ocultarlo */
+    /* Borde del color del fondo de la section (.bg-content) */
+    border: 6px solid #f4f7f6; 
     transition: 0.5s;
-    left: 0;
+    /* Z-index medio: por encima de iconos inactivos (1), por debajo de iconos activos (20) */
+    z-index: 10; 
 }
 
-/* Efecto de curvas invertidas usando box-shadow */
+/* Efecto de curvas invertidas - Ahora usan el color del fondo de la section */
 .indicator::before {
     content: '';
     position: absolute;
@@ -112,7 +246,7 @@ body {
     height: 20px;
     background: transparent;
     border-top-right-radius: 20px;
-    box-shadow: 1px -10px 0 0 #222327;
+    box-shadow: 1px -10px 0 0 #f4f7f6;
 }
 
 .indicator::after {
@@ -124,100 +258,13 @@ body {
     height: 20px;
     background: transparent;
     border-top-left-radius: 20px;
-    box-shadow: -1px -10px 0 0 #222327;
+    box-shadow: -1px -10px 0 0 #f4f7f6;
 }
 
-/* Posiciones del indicador según el elemento activo (70px por cada elemento) */
-.navigation ul li:nth-child(1).active ~ .indicator { transform: translateX(calc(70px * 0)); }
-.navigation ul li:nth-child(2).active ~ .indicator { transform: translateX(calc(70px * 1)); }
-.navigation ul li:nth-child(3).active ~ .indicator { transform: translateX(calc(70px * 2)); }
-.navigation ul li:nth-child(4).active ~ .indicator { transform: translateX(calc(70px * 3)); }
-.navigation ul li:nth-child(5).active ~ .indicator { transform: translateX(calc(70px * 4)); }
-
-/* =========================================
-   COMPONENTE 2: RADIAL SHARE MENU
-   ========================================= */
-.radial-menu {
-    position: relative;
-    width: 250px;
-    height: 250px;
-    /* Ya no necesitamos flexbox aquí porque usaremos posicionamiento absoluto exacto */
-}
-
-/* --- Botón Central --- */
-.radial-menu .toggle {
-    position: absolute;
-    /* Centrado perfecto */
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 60px;
-    height: 60px;
-    background: #fff;
-    color: #333;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2em;
-    cursor: pointer;
-    z-index: 10; /* Z-index mayor para que siempre esté al frente */
-    transition: transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1), background 0.5s;
-    box-shadow: 0 3px 4px rgba(0,0,0,0.15);
-}
-
-/* Al pasar el mouse: gira 360 grados y vuelve a quedar derecho */
-.radial-menu:hover .toggle {
-    transform: translate(-50%, -50%) rotate(360deg);
-    background: #f8f9fa;
-}
-
-/* --- Opciones del Menú (Abanico) --- */
-.radial-menu li {
-    position: absolute;
-    /* Todos nacen exactamente del centro */
-    top: 50%;
-    left: 50%;
-    width: 40px;
-    height: 40px;
-    margin-top: -20px; /* La mitad del alto para centrar perfecto */
-    margin-left: -20px; /* La mitad del ancho para centrar perfecto */
-    list-style: none;
-    transition: 0.5s;
-    /* Inicialmente en el centro (translateX en 0) */
-    transform: rotate(calc(360deg / 8 * var(--i))) translateX(0px); 
-    opacity: 0;
-    z-index: 5; /* Z-index menor que el botón para que salgan por detrás */
-}
-
-/* Al pasar el mouse al contenedor: El abanico se abre a 85px de distancia */
-.radial-menu:hover li {
-    transform: rotate(calc(360deg / 8 * var(--i))) translateX(85px);
-    opacity: 1;
-}
-
-/* --- Íconos dentro del abanico --- */
-.radial-menu li a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    background: #fff;
-    color: var(--clr);
-    border-radius: 50%;
-    font-size: 1.5em;
-    text-decoration: none;
-    transition: 0.3s;
-    box-shadow: 0 3px 4px rgba(0,0,0,0.15);
-    /* Des-rota el ícono para que no quede de cabeza o chueco */
-    transform: rotate(calc(360deg / -8 * var(--i)));
-}
-
-/* Efecto al seleccionar una red social en específico */
-.radial-menu li a:hover {
-    color: #fff;
-    background: var(--clr);
-    /* Mantiene la des-rotación y hace un pequeño zoom */
-    transform: rotate(calc(360deg / -8 * var(--i))) scale(1.15);
-}
+/* Posiciones exactas del indicador al estar dentro de la lista (calc de 100px) */
+/* Se ajusta con 'left: 15px' para centrar la burbuja de 70px dentro del espacio de 100px */
+.navigation ul li:nth-child(1).active ~ .indicator { left: calc(100px * 0 + 15px); }
+.navigation ul li:nth-child(2).active ~ .indicator { left: calc(100px * 1 + 15px); }
+.navigation ul li:nth-child(3).active ~ .indicator { left: calc(100px * 2 + 15px); }
+.navigation ul li:nth-child(4).active ~ .indicator { left: calc(100px * 3 + 15px); }
+.navigation ul li:nth-child(5).active ~ .indicator { left: calc(100px * 4 + 15px); }
